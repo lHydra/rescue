@@ -1,0 +1,28 @@
+defaults: &defaults
+  pool: 5
+  timeout: 5000
+  encoding: unicode
+  adapter: postgresql
+
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: rescue_development
+  pool: 5
+  username: postgres
+  host: localhost
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: rescue_test
+  pool: 5
+  username: postgres
+  host: localhost
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: rescue_production
+  pool: 5
+  username: postgres

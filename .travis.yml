@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+  - 2.3.1
+before_script:
+  - cp config/database.yml.example config/database.yml
+  - psql -c 'create database rescue_test' -U postgres
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare
+  - bundle exec rake
+addons:
+  code_climate:
+    repo_token: 26286bd33faf4aadce3460412fe97b9381c1044b7009c0cb68487513c996c6c9

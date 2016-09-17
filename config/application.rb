@@ -12,6 +12,8 @@ module Rescue
   class Application < Rails::Application
     config.generators do |g|
     g.template_engine :haml
+    g.stylesheets false
+    g.javascripts false
   end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

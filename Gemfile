@@ -9,9 +9,10 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-gem "codeclimate-test-reporter", group: :test, require: nil
+gem 'codeclimate-test-reporter', group: :test, require: nil
 gem 'bootstrap-sass', '~> 3.3.6'
-gem "haml-rails", "~> 0.9"
+gem 'haml-rails', '~> 0.9'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug', platform: :mri

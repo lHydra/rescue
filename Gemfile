@@ -16,6 +16,7 @@ gem "twitter-bootstrap-rails"
 gem 'haml-rails', '~> 0.9'
 gem 'faker'
 gem 'bcrypt', '~> 3.1.7'
+gem 'simple_form'
 
 group :development, :test do
   gem 'byebug', platform: :mri

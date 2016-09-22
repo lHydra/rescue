@@ -15,7 +15,7 @@ RSpec.describe PostsController, type: :controller do
 
   describe 'GET #new' do
     before(:each) { get :new }
-    
+
     it { is_expected.to render_template(:new) }
     it { is_expected.to respond_with(200) }
   end
@@ -31,6 +31,21 @@ RSpec.describe PostsController, type: :controller do
            post: { title: '1', text: '123', author: user.email }
             }.to change(Post, :count).by(1)
           expect(user.posts.last.title).to eq('1')
+      end
+    end
+  end
+
+  describe 'GET #show' do
+    context 'when post is create' do
+      let(:post) { create(:user_with_posts).posts.last }
+      before(:each) do
+        get :show, id: post.id
+       end
+
+      it { is_expected.to render_template(:show) }
+      it { is_expected.to respond_with(200) }
+      it 'should return post' do
+        expect(assigns[:post]).to eq(post)
       end
     end
   end

@@ -8,12 +8,16 @@ class PostsController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
-    @post = @user.post.create(post_params)
+    @post = @user.posts.create(post_params)
     if @post.save 
       redirect_to root_url
     else
       render :new
     end
+  end
+
+  def show
+    @post = Post.find(params[:id])
   end
 
   private

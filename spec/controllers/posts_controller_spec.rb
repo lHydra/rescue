@@ -21,7 +21,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'POST #create' do
-    let!(:user) { create(:user) }
+    let(:user) { create(:user) }
 
     context 'with valid params' do
       it 'should create post' do
@@ -33,10 +33,17 @@ RSpec.describe PostsController, type: :controller do
           expect(user.posts.last.title).to eq('1')
       end
     end
+
+    context 'with invalid params' do
+      let(:attr) { attributes_for(:post) }
+      it 'should not create post and render new template' do
+        expect{ post :create, { user_id: user.id, post: attr } }.to_not change(Post, :count)
+        expect(response).to render_template(:new)
+      end
+    end
   end
 
   describe 'GET #show' do
-    context 'when post is create' do
       let(:post) { create(:user_with_posts).posts.last }
       before(:each) do
         get :show, id: post.id
@@ -47,6 +54,40 @@ RSpec.describe PostsController, type: :controller do
       it 'should return post' do
         expect(assigns[:post]).to eq(post)
       end
+  end
+
+  describe 'POST #update' do
+    let(:post) { create(:user_with_posts).posts.last }
+
+    context 'with valid params' do
+      it 'should update post' do
+        put :update, id: post.id, post: { title: 'updated', text: 'new' }
+        expect(Post.last.title).to eq('updated')
+        expect(Post.last.text).to eq('new')
+      end
+    end
+
+    context 'with invalid params' do
+      it 'should not update post' do
+        put :update, id: post.id, post: { title: ''}
+        expect(response).to render_template(:edit)
+      end
+    end
+  end
+
+  describe 'GET #edit' do
+    let(:post) { create(:user_with_posts).posts.last }
+    before(:each) { get :edit, id: post.id }
+
+    it { is_expected.to respond_with(200) }
+    it { is_expected.to render_template(:edit)}
+  end
+
+  describe 'DELETE #destroy' do
+    let!(:post) { create(:user_with_posts).posts.last }
+
+    it 'should delete post' do
+      expect{ delete :destroy, id: post.id }.to change(Post, :count).by(-1)
     end
   end
 end

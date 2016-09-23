@@ -33,7 +33,7 @@ RSpec.describe PostsController, type: :controller do
           expect(user.posts.last.title).to eq('1')
       end
     end
-
+    
     context 'with invalid params' do
       let(:attr) { attributes_for(:post) }
       it 'should not create post and render new template' do
@@ -44,6 +44,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'GET #show' do
+    context 'when post is create' do
       let(:post) { create(:user_with_posts).posts.last }
       before(:each) do
         get :show, id: post.id

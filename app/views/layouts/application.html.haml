@@ -29,6 +29,7 @@
         .navbar-collapse.collapse.navbar-responsive-collapse
           %ul.nav.navbar-nav
             %li= link_to "Posts", posts_path
+            %li= link_to 'Add new post', new_post_path if current_user
           - if current_user
             .navbar-text.navbar-right= link_to 'Log Out', logout_path
             .navbar-text.navbar-right= "Signed as #{current_user.email}"

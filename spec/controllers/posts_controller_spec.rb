@@ -22,12 +22,12 @@ RSpec.describe PostsController, type: :controller do
 
   describe 'POST #create' do
     let(:user) { create(:user) }
+    before(:each) { session[:user_id] = user.id }
 
     context 'with valid params' do
       it 'should create post' do
         expect{ 
            post :create,
-           user_id: user.id,
            post: { title: '1', text: '123', author: user.email }
             }.to change(Post, :count).by(1)
           expect(user.posts.last.title).to eq('1')
@@ -35,9 +35,9 @@ RSpec.describe PostsController, type: :controller do
     end
     
     context 'with invalid params' do
-      let(:attr) { attributes_for(:post) }
+      let(:attr) { attributes_for(:post, title: '') }
       it 'should not create post and render new template' do
-        expect{ post :create, { user_id: user.id, post: attr } }.to_not change(Post, :count)
+        expect{ post :create, post: attr }.to_not change(Post, :count)
         expect(response).to render_template(:new)
       end
     end
@@ -55,6 +55,7 @@ RSpec.describe PostsController, type: :controller do
       it 'should return post' do
         expect(assigns[:post]).to eq(post)
       end
+    end
   end
 
   describe 'POST #update' do

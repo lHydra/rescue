@@ -5,3 +5,8 @@
 [![Build Status](https://travis-ci.org/lHydra/rescue.svg?branch=master)](https://travis-ci.org/lHydra/rescue)
 
 Тестовый проект, где я пробую новые вещи и вспоминаю старые
+
+Сделать завтра (25.09.16):
+
+* добавить картинки к постам
+* подключить и настроить cancancan

@@ -18,6 +18,8 @@ gem 'faker'
 gem 'bcrypt', '~> 3.1.7'
 gem 'simple_form'
 gem 'rails-controller-testing'
+gem 'carrierwave', '>= 1.0.0.beta', '< 2.0'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'byebug', platform: :mri

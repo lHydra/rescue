@@ -1,3 +1,4 @@
 %h1.text-center= @post.title
 %hr
+.text-center= link_to (image_tag @post.thumb.resize.url), @post.thumb.url
 %p.lead.text-center= @post.text

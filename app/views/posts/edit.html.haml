@@ -1,4 +1,9 @@
 = simple_form_for @post do |f|
   = f.input :title
   = f.input :text
+  %p= image_tag @post.thumb.th.url if @post.thumb.present?
+  Remove image
+  = f.check_box :remove_thumb
+  %p
+  = f.input :thumb, as: :file
   = f.button :submit, class: 'btn btn-success'

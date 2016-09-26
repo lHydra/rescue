@@ -1,11 +1,13 @@
-- @posts.each_slice(3) do |posts|
+- @posts.each_slice(2) do |posts|
   .row
   - posts.each do |post|
-    .col-md-4
-      .thumbnail
-        = image_tag post.thumb.th.url
+    .col-md-6.col-sm-6
+      - if post.thumb.present?
+        .thumbnail
+          = image_tag post.thumb.th.url
       .caption
         %h3= link_to post.title, post_path(post.id)
         %p= post.text
         %a.btn.btn-primary{href: edit_post_path(post.id)} Edit
         = link_to 'Delete', post_path(post.id), method: :delete, class: 'btn btn-danger'
+        %hr

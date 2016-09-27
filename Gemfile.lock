@@ -42,6 +42,7 @@ GEM
     bcrypt (3.1.10)
     builder (3.2.2)
     byebug (9.0.5)
+    cancancan (1.15.0)
     carrierwave (1.0.0.beta)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -240,6 +241,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   byebug
+  cancancan (~> 1.10)
   carrierwave (>= 1.0.0.beta, < 2.0)
   codeclimate-test-reporter
   coffee-rails (~> 4.2)

@@ -20,6 +20,7 @@ gem 'simple_form'
 gem 'rails-controller-testing'
 gem 'carrierwave', '>= 1.0.0.beta', '< 2.0'
 gem 'mini_magick'
+gem 'cancancan', '~> 1.10'
 
 group :development, :test do
   gem 'byebug', platform: :mri

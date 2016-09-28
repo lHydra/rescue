@@ -8,7 +8,7 @@
       .caption
         %h3= link_to post.title, post_path(post.id)
         %p= post.text
-        - if can? :update, post
+        - if can? :edit, post
           %a.btn.btn-primary{href: edit_post_path(post.id)} Edit
-        = link_to 'Delete', post_path(post.id), method: :delete, class: 'btn btn-danger'
+        = link_to 'Delete', post_path(post.id), method: :delete, class: 'btn btn-danger' if can? :destroy, post
         %hr

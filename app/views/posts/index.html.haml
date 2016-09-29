@@ -5,10 +5,10 @@
       - if post.thumb.present?
         .thumbnail
           = image_tag post.thumb.th.url
-      .caption
+      .caption{id: "#{post.id}"}
         %h3= link_to post.title, post_path(post.id)
         %p= post.text
         - if can? :edit, post
           %a.btn.btn-primary{href: edit_post_path(post.id)} Edit
-        = link_to 'Delete', post_path(post.id), method: :delete, class: 'btn btn-danger' if can? :destroy, post
+        = link_to 'Delete', post_path(post.id), method: :delete, class: 'btn btn-danger delete-post', remote: true if can? :destroy, post
         %hr

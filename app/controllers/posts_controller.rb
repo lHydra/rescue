@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   load_and_authorize_resource only: [:edit, :destroy]
-
+  respond_to :html, :js
+  
   def index
     @posts = Post.all
   end
@@ -13,7 +14,7 @@ class PostsController < ApplicationController
     @user = current_user
     @post = @user.posts.create(post_params)
     if @post.save 
-      redirect_to post_path(@post.id)
+      respond_with(@post)
     else
       render :new
     end
@@ -30,16 +31,17 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to post_path(@post.id)
+      respond_with(@post)
     else
       render :edit
     end
   end
 
   def destroy
+    @lol = 1
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to posts_path
+    respond_with(@post)
   end
 
   private

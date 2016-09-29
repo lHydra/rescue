@@ -79,7 +79,11 @@ RSpec.describe PostsController, type: :controller do
 
   describe 'GET #edit' do
     let(:post) { create(:user_with_posts).posts.last }
-    before(:each) { get :edit, id: post.id }
+    let(:user) { create(:user, role: 'admin') }
+    before(:each) do
+      session[:user_id] = user.id 
+      get :edit, id: post.id
+    end
 
     it { is_expected.to respond_with(200) }
     it { is_expected.to render_template(:edit)}
@@ -87,6 +91,10 @@ RSpec.describe PostsController, type: :controller do
 
   describe 'DELETE #destroy' do
     let!(:post) { create(:user_with_posts).posts.last }
+    let!(:user) do
+     u = create(:user, role: 'admin')
+     session[:user_id] = u.id
+   end
 
     it 'should delete post' do
       expect{ delete :destroy, id: post.id }.to change(Post, :count).by(-1)

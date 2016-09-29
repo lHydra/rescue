@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   load_and_authorize_resource only: [:edit, :destroy]
-
+  respond_to :html, :js
+  
   def index
     @posts = Post.all
   end
@@ -37,6 +38,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @lol = 1
     @post = Post.find(params[:id])
     @post.destroy
     respond_with(@post)

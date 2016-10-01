@@ -21,8 +21,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:user) { create(:user) }
-    before(:each) { session[:user_id] = user.id }
+    let!(:user) { login_as_user }
 
     context 'with valid params' do
       it 'should create post' do
@@ -79,9 +78,8 @@ RSpec.describe PostsController, type: :controller do
 
   describe 'GET #edit' do
     let(:post) { create(:user_with_posts).posts.last }
-    let(:user) { create(:user, role: 'admin') }
     before(:each) do
-      session[:user_id] = user.id 
+      login_as_admin
       get :edit, id: post.id
     end
 
@@ -91,10 +89,7 @@ RSpec.describe PostsController, type: :controller do
 
   describe 'DELETE #destroy' do
     let!(:post) { create(:user_with_posts).posts.last }
-    let!(:user) do
-     u = create(:user, role: 'admin')
-     session[:user_id] = u.id
-   end
+    before(:each) { login_as_admin }
 
     it 'should delete post' do
       expect{ delete :destroy, id: post.id }.to change(Post, :count).by(-1)

@@ -1,0 +1,11 @@
+= simple_form_for [:admin, @post] do |f|
+  = f.hidden_field :author, value: current_user.email if @post.new_record?
+  = f.input :title
+  = f.input :text
+  - if @post.thumb.present?
+    %p= image_tag @post.thumb.th.url
+    Remove image
+    = f.check_box :remove_thumb
+  %p
+  = f.input :thumb, as: :file
+  = f.button :submit, 'Create Article', class: 'btn btn-success'

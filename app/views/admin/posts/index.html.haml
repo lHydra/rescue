@@ -1,0 +1,15 @@
+- @posts.each_slice(2) do |posts|
+  .row
+  - posts.each do |post|
+    .col-md-6.col-sm-6{id: "#{post.id}"}
+      - if post.thumb.present?
+        .thumbnail
+          = image_tag post.thumb.th.url
+      .caption
+        %h3= link_to post.title, admin_post_path(post.id)
+        %p= post.text
+        - if can? :edit, post
+          %a.btn.btn-primary{href: edit_admin_post_path(post.id)} Edit
+        = link_to 'Delete', admin_post_path(post.id), method: :delete, class: 'btn btn-danger delete-post', remote: true, id: 'post_delete' if can? :destroy, post
+        %hr
+= link_to 'New Article', new_admin_post_path, class: 'btn btn-success'

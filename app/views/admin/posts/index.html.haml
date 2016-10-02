@@ -12,4 +12,4 @@
           %a.btn.btn-primary{href: edit_admin_post_path(post.id)} Edit
         = link_to 'Delete', admin_post_path(post.id), method: :delete, class: 'btn btn-danger delete-post', remote: true, id: 'post_delete' if can? :destroy, post
         %hr
-= link_to 'New Article', new_admin_post_path, class: 'btn btn-success'
+%p.col-md-12= link_to 'New Article', new_admin_post_path, class: 'btn btn-success'

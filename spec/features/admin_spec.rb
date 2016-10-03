@@ -44,3 +44,34 @@ feature 'article managment' do
     expect(page). to have_content('It is a new post')
   end
 end
+
+feature 'user managment' do
+  given!(:admin) { create(:user, password: '123', password_confirmation: '123', role: 'admin') }
+  before(:each) { sign_in(admin, '123') }
+
+  scenario 'adds user' do
+    click_link 'Manage Users'
+
+    expect(current_path).to eq(admin_users_path)
+    expect{
+      click_link 'Add User'
+      fill_in 'Email', with: 'somemail@mail.ru'
+      fill_in 'Password', with: '123'
+      fill_in 'Password confirmation', with: '123'
+      click_button 'Create User'
+    }.to change(User, :count).by(1)
+
+    expect(current_path).to eq(admin_users_path)
+    expect(page).to have_content('somemail@mail.ru')
+  end
+
+  scenario 'delete user' do
+    create(:user, email: 'mail@mails.ru')
+    click_link 'Manage Users'
+    click_link 'mail@mails.ru'
+    
+    expect{
+      click_link 'Delete User'
+    }.to change(User, :count).by(-1)  
+  end
+end

@@ -1,0 +1,6 @@
+:plain
+  $(document).ready(function() {
+    $("#post_delete").on("ajax:success", function(data){
+      $("#" + "#{j @post.id.to_s}").fadeOut();
+    });  
+  });

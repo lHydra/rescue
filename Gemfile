@@ -31,6 +31,8 @@ end
 
 group :test do
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'capybara', '~> 2.8'
+  gem 'guard-rspec', require: false
 end
 
 group :development do

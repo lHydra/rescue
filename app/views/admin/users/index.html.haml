@@ -1,0 +1,4 @@
+- @users.each do |user|
+  %p= link_to user.email, admin_user_path(user.id)
+  %hr
+= link_to 'Add User', new_admin_user_path

@@ -1,0 +1,6 @@
+= simple_form_for [:admin, @user] do |f|
+  = f.input :email
+  = f.input :password
+  = f.input :password_confirmation
+  = f.input :role
+  = f.button :submit, 'Create User', class: 'btn btn-success'

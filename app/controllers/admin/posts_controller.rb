@@ -1,5 +1,5 @@
-class PostsController < ApplicationController
-  load_and_authorize_resource only: [:edit, :destroy]
+class Admin::PostsController < ApplicationController
+  load_and_authorize_resource
   respond_to :html, :js
   
   def index
@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     @user = current_user
     @post = @user.posts.create(post_params)
     if @post.save 
-      respond_with(@post)
+      redirect_to admin_posts_path, notice: 'Article was created'
     else
       render :new
     end
@@ -31,7 +31,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      respond_with(@post)
+      redirect_to admin_posts_path, notice: 'Article was successfully updated'
     else
       render :edit
     end

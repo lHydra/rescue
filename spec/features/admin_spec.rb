@@ -43,6 +43,17 @@ feature 'article managment' do
     expect(current_path).to eq(admin_posts_path)
     expect(page). to have_content('It is a new post')
   end
+
+  scenario 'update article' do
+    post = create(:post, title: 'Some Title')
+    click_link 'Manage Articles'
+    click_link "#{post.id}"
+
+    fill_in 'Title', with: 'Update Title'
+    click_button 'Create Article'
+
+    expect(page).to have_content('updated')
+  end
 end
 
 feature 'user managment' do
@@ -73,5 +84,17 @@ feature 'user managment' do
     expect{
       click_link 'Delete User'
     }.to change(User, :count).by(-1)  
+  end
+
+  scenario 'update user' do
+    create(:user, email: 'mail@mails.ru')
+    click_link 'Manage Users'
+    click_link 'mail@mails.ru'
+    click_link 'Update User'
+
+    fill_in 'Email', with: 'newmail@mail.ru'
+    click_button 'Create User'
+
+    expect(page).to have_content('updated')
   end
 end

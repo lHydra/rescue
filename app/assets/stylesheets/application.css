@@ -9,13 +9,7 @@
   display: block;
   margin: 0 auto;
   width: 100%;
-  max-width: 600px;
-}
-
-.modal-dialog {
-  background: $white;
   max-width: 500px;
-  width: 80%;
 }
 
 .thumbnail > img {

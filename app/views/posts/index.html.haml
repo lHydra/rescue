@@ -4,7 +4,11 @@
     .col-md-6.col-sm-6{id: "#{post.id}"}
       - if post.thumb.present?
         .thumbnail
-          = image_tag post.thumb.th.url
+          = image_tag post.thumb.th.url,  'data-toggle': 'modal', 'data-target': "#modal_#{post.id}"
+          .modal.fade.bs-example-modal-lg{"aria-labelledby" => "myLargeModalLabel", role: "dialog", tabindex:  "-1", id: "modal_#{post.id}"}
+            .modal-dialog.modal-lg{role: "document"}
+              .modal-content
+                = image_tag post.thumb.resize.url, class: 'modal-image'
       .caption
         %h3= link_to post.title, post_path(post.id)
         %p= post.text

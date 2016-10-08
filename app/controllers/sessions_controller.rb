@@ -12,6 +12,10 @@ class SessionsController < ApplicationController
       else
         redirect_to root_path, notice: 'Welcome!'
       end
+    elsif request.env['omniauth.auth']
+      user = User.from_omniauth(request.env['omniauth.auth'])
+      session[:user_id] = user.id
+      redirect_to root_path, notice: 'Welcome!'
     else
       flash.now.alert = 'Email or password is invalid'
       render 'new'

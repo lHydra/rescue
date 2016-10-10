@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   load_and_authorize_resource only: [:edit, :destroy]
   respond_to :html, :js
+  before_filter :find_post, only: [:show, :edit, :update, :destroy]
   
   def index
     @posts = Post.all
@@ -13,7 +14,7 @@ class PostsController < ApplicationController
   def create
     @user = current_user
     @post = @user.posts.create(post_params)
-    if @post.save 
+    if @post.save
       respond_with(@post)
     else
       render :new
@@ -21,15 +22,12 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def edit
-    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
       respond_with(@post)
     else
@@ -38,12 +36,15 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     respond_with(@post)
   end
 
   private
+
+  def find_post
+    @post = Post.find(params[:id])
+  end
 
   def post_params
     params.require(:post).permit(:title, :text, :author, :thumb, :remove_thumb)

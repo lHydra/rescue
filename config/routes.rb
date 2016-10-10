@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'login', to: 'sessions#new'
   get 'logout', to: 'sessions#destroy'
+  get '/auth/:provider/callback', to: 'sessions#create'
   resource :users 
   resources :posts
   resource :sessions

@@ -1,0 +1,5 @@
+%h4= "Search results for query: #{params[:query]}"
+- @search_res.each do |r|
+  %h2= link_to r.title, post_path(r.id)
+  %h3= r.text
+  %hr

@@ -23,6 +23,7 @@ gem 'mini_magick'
 gem 'cancancan', '~> 1.10'
 gem 'responders'
 gem 'omniauth-twitter'
+gem 'pg_search'
 
 group :development, :test do
   gem 'byebug', platform: :mri

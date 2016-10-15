@@ -1,6 +1,7 @@
 = simple_form_for @post do |f|
   = f.input :title
   = f.input :text
+  = f.input :all_tags
   %p= image_tag @post.thumb.th.url if @post.thumb.present?
   Remove image
   = f.check_box :remove_thumb

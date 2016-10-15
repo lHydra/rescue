@@ -5,11 +5,20 @@
  *= require_self
  *= require_tree .
 */
+
+.modal-lg {
+  max-width: 600px;
+}
+
 .modal-image {
   display: block;
   margin: 0 auto;
-  width: 100%;
-  max-width: 500px;
+  width: 110%;
+  max-width: 530px;
+}
+
+.modal-content {
+  padding: 30px;
 }
 
 .thumbnail > img {

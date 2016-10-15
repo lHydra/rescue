@@ -2,5 +2,6 @@
   = f.hidden_field :author, value: current_user.email
   = f.input :title
   = f.input :text
+  = f.input :all_tags, placeholder: 'Указывайте через запятую'
   = f.input :thumb, as: :file
   = f.button :submit, class: 'btn btn-success'

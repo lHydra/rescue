@@ -47,6 +47,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :text, :author, :thumb, :remove_thumb)
+    attrib = [:title, :text, :author, :thumb, :remove_thumb, :all_tags]
+    params.require(:post).permit(attrib)
   end
 end
